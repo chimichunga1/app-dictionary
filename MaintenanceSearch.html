@@ -1,0 +1,293 @@
+
+<div ng-controller="token_controller">
+</div>
+
+<div ng-controller="dictionary_list">
+  <div class="container">
+
+    <br><br>
+    <div id="accordion">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <md-button class="md-raised md-primary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"  style="background-color: #4CAF50;"><i class="fa fa-plus"></i> Add Data&nbsp;</md-button>
+<!--             <button class="btn btn-success" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <i class="fa fa-plus"></i> Add Search Data
+            </button> -->
+          </h5>
+        </div>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion" >
+          <div class="card-body">
+              <br>
+                <md-input-container class="md-block">
+                  <label>Job Title ( Keyword ) </label>
+                    <input ng-model="chips.job_title" >
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Synonymous</label>
+                <md-chips ng-model="chips.synonymous" md-enable-chip-edit="true" placeholder="Add Synonymous" md-add-on-blur='true' >     
+                </md-chips>
+                </md-input-container>
+                <md-input-container class="md-block">
+                  <label>Mispells</label>
+                  <md-chips ng-model="chips.misspell" md-enable-chip-edit="true" placeholder="Add Mispells" md-add-on-blur='true' ></md-chips>
+                </md-input-container>
+                <md-input-container class="md-block">
+                  <label>Suggestions</label>
+                  <md-chips ng-model="chips.suggestion" md-enable-chip-edit="true" placeholder="Add Suggestions" md-add-on-blur='true' ></md-chips>
+                </md-input-container>
+
+
+                  <br>
+                <md-button class="md-raised md-primary"  ng-click="AddNewDictForm()" style="background-color: #4CAF50;"><i class="fa fa-check"></i> Save Data&nbsp;</md-button>
+<!--                 <button class="btn btn-success" ng-click="AddNewDictForm()"> <i class="fa fa-check"></i> Save Data</button> -->
+            </div>
+        </div>
+      </div>
+    </div>
+<br>
+
+      <div class="row">
+        <div class="col-lg-5">
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label><i class="fa fa-search"></i> Search</label>
+            <input  placeholder="Enter a keyword ..." aria-describedby="basic-addon1"  ng-model="search">
+          </md-input-container>
+<!--           <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-search"></i></span>
+            <input type="text" class="form-control" placeholder="Enter a keyword ..." aria-describedby="basic-addon1"  ng-model="search">
+          </div> -->
+        </div>
+        <div class="col-lg-1 col-md-offset-6">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Limit by: </label>
+            <md-select  ng-model="pageSize" id="pageSize" ng-change="change()">
+              <md-option value="5">
+                5
+              </md-option>
+              <md-option value="10">
+                10
+              </md-option>
+              <md-option value="25">
+                25
+              </md-option>
+              <md-option value="50">
+                50
+              </md-option>
+              <md-option value="100">
+                100
+              </md-option>
+
+            </md-select>
+          </md-input-container>
+
+<!--            <select ng-model="pageSize" id="pageSize" class="form-control" ng-change="change()">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="40">40</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+           </select> -->
+        </div>
+      </div>
+<br>
+
+
+  
+        <table class="table"> 
+            <tr>
+              <th scope="col" class="col-md-2">Keyword</th>            
+              <th scope="col" class="col-md-2">Synonymous</th>
+              <th scope="col" class="col-md-2">Misspell</th>
+              <th scope="col" class="col-md-3">Suggestions</th>          
+              <th scope="col" class="col-md-2">Actions</th>
+
+            </tr>
+            <tr dir-paginate="item in doc|orderBy:sortKey:reverse|filter:search|itemsPerPage:pageSize">
+              <td scope="col" class="col-md-2">{{item.value.display.toString()}}</td>
+              <td scope="col" class="col-md-2">{{(item.value.synonymous | limitTo : 3).toString()}}<span ng-if="item.value.synonymous.length > 3"> ...</span></td>
+              <td scope="col" class="col-md-2">{{(item.value.misspell | limitTo : 3).toString()}}<span ng-if="item.value.misspell.length > 3"> ...</span></td>
+              <td scope="col" class="col-md-3">{{(item.value.suggestion | limitTo : 3).toString()}}<span ng-if="item.value.suggestion.length > 3"> ...</span></td>       
+              <td scope="col" class="col-md-2">
+
+<!--               <md-button class="md-raised md-primary" data-toggle="modal" data-target="#viewDict"  ng-click="viewDict(item.value)"  style="background-color: #2196F3;"><i class="fa fa-eye"></i></md-button>
+              <md-button class="md-raised md-primary" data-toggle="modal" data-target="#newEditDict"  ng-click="newEditDict(item.value)"  style="background-color: #2196F3;"><i class="fa fa-edit"></i></md-button>
+              <md-button class="md-raised md-primary" data-toggle="modal" data-target="#deleteDict"  ng-click="deleteDict(item)"  style="background-color: #C62828;"><i class="fa fa-trash"></i></md-button> -->
+
+           
+              <button class="btn btn-info" data-toggle="modal" data-target="#ViewDict"  ng-click="newEditDict(item.value)" title="View Data"><i class="fa fa-eye"></i></button>     
+              <button class="btn btn-info" data-toggle="modal" data-target="#newEditDict"  ng-click="newEditDict(item.value)"  title="Edit Data"><i class="fa fa-edit"></i></button>
+              <button class="btn btn-danger" data-toggle="modal" data-target="#deleteDict"  ng-click="deleteDict(item)"  title="Delete Data"><i class="fa fa-trash"></i></button>            
+              </td>
+            </tr>
+        </table>
+
+
+
+<br>
+        <dir-pagination-controls
+          max-size="5"
+          direction-links="true"
+          boundary-links="true" >
+        </dir-pagination-controls>
+<br>
+  <!---=============================================================------>  
+          <div class="modal fade" id="ViewDict" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content" style="color:black;">
+                <div class="modal-header"><h4>View Details</h4> 
+   <!--                <h3 class="modal-title" id="exampleModalLabel" style="color:black;"> 
+                    
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button><br></h3> -->
+                </div>
+<br>
+                <div class="modal-body">
+                  <md-input-container class="md-block">
+                    <label><h4>Display</h4></label>
+                    <input ng-model="send.display" placeholder="{{ViewDataModal.display.toString()}}" readonly="true">
+                  </md-input-container>
+<br>
+                  <md-input-container class="md-block">
+                    <label><h4>Synonymous</h4></label>
+                    <md-chips ng-model="send.synonymous" md-enable-chip-edit="false" placeholder="Add Synonymous" md-add-on-blur='true'  readonly="true"></md-chips>
+                  </md-input-container>
+<br>
+                  <md-input-container class="md-block">
+                    <label><h4>Mispells</h4></label>
+                    <md-chips ng-model="send.misspell" md-enable-chip-edit="false" placeholder="Add Mispells" md-add-on-blur='true'  readonly="true" ></md-chips>
+                  </md-input-container>
+<br>
+                  <md-input-container class="md-block">
+                    <label><h4>Suggestions</h4></label>
+                    <md-chips ng-model="send.suggestion" md-enable-chip-edit="false" placeholder="Add Suggestions" md-add-on-blur='true'  readonly="true" ></md-chips>
+                  </md-input-container>
+
+                </div>
+
+       <div class="footer col-md-offset-9">
+          <md-button class="md-raised md-info"  data-dismiss="modal"> Close &nbsp;</md-button>
+<!--                   <button type="button" class="btn btn-secondary" data-dismiss="modal" style="color:black;">Close</button> -->
+        </div>
+      <br>
+    </div>
+  </div>
+</div>
+
+  <!---=============================================================------>  
+<!--           <div class="modal fade" id="viewDict" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content" style="color:black;">
+                <div class="header">
+                  <h3 class="title col-md-4" id="exampleModalLabel" style="color:black;"> 
+                 View Details    
+</h3>
+                </div>
+        
+                <div class="modal-body">
+        <div class="table-responsive">
+        <table class="table col-md-12"> 
+            <tr>
+     
+              <th scope="col">Display</th>
+              <th scope="col">Synonymous</th>
+              <th scope="col">Misspell</th>
+              <th scope="col">Suggestions</th>         
+            </tr>
+            <tr>
+         
+              <td ng-bind="ViewDataModal.display.toString()"></td>            
+              <td ng-bind="ViewDataModal_synonymous.toString()"></td>
+              <td ng-bind="ViewDataModal_misspell.toString()"></td>
+              <td ng-bind="ViewDataModal_suggestion.toString()"></td>    
+            </tr>
+        </table>
+        </div>
+                </div>
+       <div class="footer col-md-offset-10">
+                  <md-button class="md-raised md-info"  data-dismiss="modal"> close</md-button>
+
+ 
+                </div>
+                <br>
+
+              </div>
+            </div>
+          </div> -->
+
+  <!---=============================================================------>  
+          <div class="modal fade" id="newEditDict" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content" style="color:black;">
+                <div class="modal-header"><h4>Edit Details</h4>
+
+<!--                   <h3 class="title  col-md-4" id="exampleModalLabel" style="color:black;">
+
+                  <br></h3> -->
+
+                </div>
+<br>
+                <div class="modal-body">
+                  <md-input-container class="md-block">
+                    <label><h4>Display</h4></label>
+                    <input ng-model="send.display">
+                  </md-input-container>
+                  <br>
+                  <md-input-container class="md-block">
+                    <label><h4>Synonymous</h4></label>
+                    <md-chips ng-model="send.synonymous" md-enable-chip-edit="true" placeholder="Add Synonymous" md-add-on-blur='true'  ></md-chips>
+                  </md-input-container>
+                  <br>
+                  <md-input-container class="md-block">
+                    <label><h4>Mispells</h4></label>
+                    <md-chips ng-model="send.misspell" md-enable-chip-edit="true" placeholder="Add Mispells" md-add-on-blur='true'  ></md-chips>
+                  </md-input-container>
+                  <br>
+                  <md-input-container class="md-block">
+                    <label><h4>Suggestions</h4></label>
+                    <md-chips ng-model="send.suggestion" md-enable-chip-edit="true" placeholder="Add Suggestions" md-add-on-blur='true'  ></md-chips>
+                  </md-input-container>
+                </div>
+       <div class="footer col-md-offset-7">
+                  <md-button class="md-raised md-info"  data-dismiss="modal"> Cancel</md-button>
+                  <md-button class="md-raised md-primary"  type="submit" data-dismiss="modal" ng-click="newEditDictForm()" style="background-color: #4CAF50;">Save changes</md-button>                                   
+<!-- <button type="button" class="btn btn-secondary" data-dismiss="modal" style="color:black;">Close</button> -->
+<!-- <input type="submit" class="btn btn-success" data-dismiss="modal" value="Save changes" ng-click="newEditDictForm()"> -->
+                </div>
+                <br>
+              </div>
+            </div>
+          </div>
+  <!---==============================================================------>  
+
+      <form ng-submit="deleteDictForm()">
+          <div class="modal fade" id="deleteDict" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+ <!--               <div class="col-md-2">
+                  <h5 class="modal-title" id="exampleModalLabel" style="color:black;"></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button><br>
+                 </div> -->
+                <div class="modal-body">
+                  <h3><center>Would you like to delete this data?</center></h3>
+                </div>
+       <div class="footer col-md-offset-7">
+                  <md-button class="md-raised md-info"  data-dismiss="modal"> Cancel</md-button>
+                  <md-button class="md-raised md-primary"  type="button" data-dismiss="modal" ng-click="deleteDictForm()" style="background-color: #4CAF50;">Yes</md-button> 
+
+<!--                   <button type="button" class="btn btn-secondary" data-dismiss="modal" style="color:black;">No</button>
+                  <input type="button" class="btn btn-success"   data-dismiss="modal" value="Yes" ng-click="deleteDictForm()"> -->
+         </div>
+         <br>
+              </div>
+            </div>
+          </div>
+      </form>
+    </div>
+</div>
+

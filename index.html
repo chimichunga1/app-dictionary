@@ -1,0 +1,88 @@
+<html lang="en" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+  <script src="js/app-dictionary.js"></script><!-- PAGSAMAHIN ANG APP AT TRY JS -->
+  <script src="js/sweetalert2/sweetalert2.js"></script>
+  <script src="js/sweetalert2/sweetalert2.min.js"></script>
+  <script src="js/sweetalert2/sweetalert2.all.min.js"></script>
+  <script src="js/ui-bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.3.8/angular-strap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.3.8/angular-strap.tpl.min.js"></script>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/sweetalert2.min.css">
+  <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+    <script src="js/lib/dirPagination.js"></script>
+   
+
+
+
+</head>
+
+
+
+<body ng-app="dictApp" ng-cloak style="background-color: white;  position: relative;
+  margin: 0;
+  font-family: 'Work Sans', Arial, Helvetica, sans-serif;
+  min-height: 100%;
+  background: linear-gradient(to bottom, #68EACC 0%, #497BE8 100%);
+  color: #777;">
+
+
+<div class="container" ng-controller="dictionary_list">
+
+
+
+      <md-card class="col-md-5 col-md-offset-7">
+  <!--       <img class="md-card-image" alt="Washed Out"> -->
+        <md-card-title >
+          <md-card-title-text>
+            <span class="md-headline">Log In </span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+  <form ng-submit="LoginForm()">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Username</label>
+            <input ng-model="email" type="email" required>
+          </md-input-container>
+
+      
+
+           <md-input-container class="md-block" flex-gt-sm>
+            <label>Password</label>
+            <input ng-model="password" type="password" required>
+          </md-input-container>
+
+
+<br>
+          <md-button class="md-raised md-primary col-md-12" type="submit">Login</md-button>
+     </form>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+ 
+        </md-card-actions>
+      </md-card>
+
+
+
+</div>
+
+
+</body>
+
+</html>
+

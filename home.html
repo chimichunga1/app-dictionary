@@ -1,0 +1,109 @@
+<html lang="en" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+  <script src="js/app-dictionary.js"></script><!-- PAGSAMAHIN ANG APP AT TRY JS -->
+  <script src="js/sweetalert2/sweetalert2.js"></script>
+  <script src="js/sweetalert2/sweetalert2.min.js"></script>
+  <script src="js/sweetalert2/sweetalert2.all.min.js"></script>
+  <script src="js/ui-bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.3.8/angular-strap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.3.8/angular-strap.tpl.min.js"></script>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/sweetalert2.min.css">
+  <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+    <script src="js/lib/dirPagination.js"></script>
+   
+   
+
+
+
+</head>
+
+
+<div ng-controller="dictionary_list">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#/!">Search Engine</a>
+      </div>
+      
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="#!Maintenance">Maintenance <span class="sr-only">(current)</span></a></li>
+          <li><a href="#!Search">Search</a></li>
+          <li><a></a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+
+          <li><a>Welcome, {{doc_user_authenticated.admin_email}}</a></li>
+          <li><a data-toggle="modal" data-target="#logout" >Logout</a></li>          
+
+<!--           <li><a href="#!login" ng-if="doc_auth != ''">Welcome, {{doc_auth.admin_fname}}!</a></li>       
+          <li><a href="#!signup">Log Out</a></li>
+ -->
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+<body ng-app="dictApp" ng-cloak style="background-color: white;">
+
+  <ng-view></ng-view>
+
+<div ng-controller="dictionary_list">
+  <!---=============================================================------>  
+          <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content" style="color:black;">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel" style="color:black;">                
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button><br></h5>
+                </div>
+        
+                <div class="modal-body">
+
+                 <center><b> Would you like to log out?</b></center>
+
+                </div>
+                <div class="modal-footer">
+                  <md-button class="md-raised md-info"  data-dismiss="modal"> close</md-button>
+<!--                   <button type="button" class="btn btn-secondary" data-dismiss="modal" style="color:black;">Close</button> -->
+                   <md-button class="md-raised md-primary" ng-click="LogoutForm()" style="background-color: #4CAF50;">Yes</md-button>   
+                </div>
+              </div>
+            </div>
+          </div>
+</div>
+  <!---=============================================================------>  
+
+</body>
+
+
+
+</html>
+
